@@ -1,0 +1,17 @@
+app-id: "CaCM22E2aTM4TfFixyLpdxsf8LfirekKqGVftfN7Nn13"
+sdk-key: "D4KQkj26GaVdzTbkqavTh2pgjieFZAWJfMBp16nmw2jE"
+
+lan-url: "rtsp://admin:kemn981223@192.168.1.64:554/h264/ch1/main/av_stream"
+lan-on: "0"
+
+camera-default: "0"
+camera:
+  camera1: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"
+  camera2: "1"
+
+server-on: "1"
+database:
+  host: 'localhost'
+  user: 'root'
+  password: 'root'
+  base: 'face'

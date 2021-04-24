@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" >
+
+    <style type="text/css">
+         .one {
+        width: 820px;
+        height: 550px;
+        border-radius: 5px;
+        background: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 5%, rgba(255, 255, 255, 0.4) 10%, rgba(167, 166, 166, 0.6) 90%, rgba(150, 148, 148, 0.8) 95%, rgb(175, 173, 173) 100%);
+        margin: 0 auto;
+        padding: 10px;
+    }
+
+    .two {
+        width: 800px;
+        height: 550px;
+        background-color: rgb(158, 106, 106);
+        border-radius: 10px;
+
+    }
+    html, body{
+        background:url(https://ftp.bmp.ovh/imgs/2021/03/a0df7835c18770c9.jpeg) no-repeat;
+        background-size:100% 1400px;
+        background-position: center center;
+        overflow: auto;
+    }
+</style>
+</head>
+<body>
+
+<div style="height:30px;"></div>
+<div class="one">
+    <div class="two">
+        <img id ="img" src="https://ftp.bmp.ovh/imgs/2021/03/cd3b6abec3c23ae5.jpg" alt="" style="width: 800px;height: 550px;">
+    </div>
+</div>
+<div style="height:40px;"></div>
+<div style = "text-align:center; margin: 0 auto;">
+    <div class="ui compact menu">
+        <div class="ui simple dropdown item">
+            Play On
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <div class="item" onclick="startWS()">1号摄像头</div>
+                <div class="item" onclick="startWS()">2号摄像头</div>
+                <div class="item" onclick="sendWS('camera1')">3号摄像头</div>
+            </div>
+    </div>
+</div>
+
+
+
+<script>
+    var ws;
+    function startWS() {
+        console.log('start once again');
+        ws = new WebSocket("ws://127.0.0.1:8124");
+        ws.onopen =  function (msg) {
+            console.log('webSocket opened');
+        };
+        ws.onmessage = function (message) {
+            $("#img").attr("src",message.data);
+        };
+        ws.onerror = function (error) {
+            console.log('error :' + error.name + error.number);
+        };
+        ws.onclose =  function () {
+            console.log('webSocket closed');
+        };
+    }
+    function sendWS(camera_id){
+        ws.send(camera_id)
+    }
+    //startWS()
+</script>
+
+
+</body>
+
+</html>
